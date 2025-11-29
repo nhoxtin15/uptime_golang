@@ -1,0 +1,22 @@
+services:
+  uptime-server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    environment:
+      - PORT=8080
+    networks:
+      - uptime-network
+  uptime-db:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=uptime
+    networks:
+      - uptime-network
+
+networks:
+  uptime-network:
